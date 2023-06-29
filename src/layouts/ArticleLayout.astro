@@ -8,12 +8,12 @@ export interface Props {
 
 const { content } = Astro.props as Props;
 const { title, image, imageDescription, description } = content;
-const date = new Date(content.date);
+const date = content.date;
 ---
 
 <BaseLayout title={title} description={description}>
   <h1
-    class="text-3xl md:text-5xl 2xl:text-6xl mb-[0.8em] font-extrabold mx-auto w-fit"
+    class="text-3xl md:text-5xl 2xl:text-6xl mb-[0.8em] font-extrabold mx-auto w-fit text-blue-900"
   >
     {title}
   </h1>
@@ -31,33 +31,10 @@ const date = new Date(content.date);
   }
 
   <div class="flex flex-wrap justify-evenly mb-9 mt-2">
-    <div>
-      <svg
-        xmlns="http://www.w3.org/2000/svg"
-        class="h-6 w-6 inline"
-        fill="none"
-        viewBox="0 0 24 24"
-        stroke="currentColor"
-        stroke-width="2"
-      >
-        <path
-          stroke-linecap="round"
-          stroke-linejoin="round"
-          d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-      </svg>
-      <time datetime={date.toISOString()}
-        >{
-          date.toLocaleDateString("en-uk", {
-            day: "numeric",
-            month: "long",
-            year: "numeric",
-          })
-        }</time
-      >
-    </div>
-  </div>
-
-  <div class="prose md:prose-lg 2xl:prose-xl px-4 mx-auto prose-pre:font-mono">
-    <slot />
+    <div>{date}</div>
   </div>
 </BaseLayout>
+
+<div class="prose md:prose-lg 2xl:prose-xl px-4 mx-auto prose-pre:font-mono">
+  <slot />
+</div>
